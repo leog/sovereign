@@ -7,8 +7,8 @@ import './profileEditor.js';
 import '../../avatar/avatar.js';
 import '../../authenticity/authenticity.js';
 import '../../../../widgets/warning/warning.js';
-import './multiTokenProfile.html';  
-import './multiTokenProfile.js';  
+import './multiTokenProfile.html';
+import './multiTokenProfile.js';
 
 Template.profile.helpers({
   configProfile() {
