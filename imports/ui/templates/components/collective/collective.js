@@ -26,8 +26,10 @@ Template.collective.onRendered(() => {
   }
 
   window.addEventListener('click', function (e) {
-    if (!document.getElementById('card-user-login').contains(e.target)) {
-      promptLogin((!Session.get('user-login') || !Session.get('user-login').visible), event);
+    if (document.getElementById('card-user-login')){
+      if (!document.getElementById('card-user-login').contains(e.target)) {
+        promptLogin((!Session.get('user-login') || !Session.get('user-login').visible), event);
+      }
     }
   });
 });
@@ -54,6 +56,15 @@ Template.collective.helpers({
     }
     return '';
   },
+  username() {
+    let user =  Meteor.user()
+    if (user.profile && user.profile.fullName) {
+      return user.profile.fullName
+    } else {
+      return user.username
+    }
+
+  }
 });
 
 Template.collective.events({

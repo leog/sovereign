@@ -16,6 +16,7 @@ log('[starting publications]');
 const USER_FIELDS = {
   username: 1,
   profile: 1,
+  "services.auth0.email": 1,
 };
 
 /**

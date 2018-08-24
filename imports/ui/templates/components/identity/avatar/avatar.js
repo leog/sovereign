@@ -267,12 +267,15 @@ Template.avatar.helpers({
           const username = Meteor.user().username;
           return showFullName(firstname, lastName, username);
         }
-        return Meteor.user().username;
+        return Meteor.user().profile.fullName;
       }
     } else if (profile.firstName !== undefined) {
       return showFullName(profile.firstName, profile.lastName, profile.username);
     } else {
       let user = Meteor.users.findOne({ _id: profile });
+      if (user.profile.fullName) {
+        return user.profile.fullName
+      }
       if (user === undefined) { user = getAnonymous(); }
       return showFullName(user.profile.firstName, user.profile.lastName, user.username);
     }

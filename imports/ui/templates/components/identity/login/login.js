@@ -24,6 +24,7 @@ Template.login.events({
     animatePopup(false, `login-${Meteor.userId()}`);
     Meteor.logout();
     Router.go('/');
+    $('body').append('<iframe src="https://entrar.mivoz.uy/logout" style="display:none"></iframe>')
   },
 });
 
