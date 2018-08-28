@@ -170,3 +170,20 @@ Accounts.onCreateUser((opts, user) => {
 
   return user;
 });
+
+Accounts.onLogin((opts) => {
+  let user = Meteor.user()
+  let profile = opts.profile || {};
+
+  // Find the first normalizer for the first service the user has.
+  // Not sure if we need to be so strict, but I'm keeping the contract of the previous impl.
+  const normalizer = _.chain(normalizers)
+    .pick(Object.keys(user.services || {}))
+    .values()
+    .first()
+    .value();
+
+  user = !!normalizer ? normalizer(profile, user) : user;
+
+  Meteor.users.update({'_id': user._id},{$set: {'profile': user.profile, 'username':  user.username}})
+});
